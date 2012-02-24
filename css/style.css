@@ -1,0 +1,4 @@
+/*Style to get bootstrap inline with Drupal*/
+.container-fluid {
+  margin-top: 30px;
+}

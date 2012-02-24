@@ -1,0 +1,15 @@
+name = Drupal Twitter Bootstrap
+description = Twitter Bootstrap Drupal 7 theme
+package = Core
+version = 0.1
+core = 7.x
+
+screenshot = screenshot.png
+
+stylesheets[all][] = bootstrap/bootstrap.min.css
+stylesheets[all][] = css/style.css
+
+regions[header] = Header
+regions[sidebar_left] = Left sidebar
+regions[content] = Content
+regions[footer] = Footer
