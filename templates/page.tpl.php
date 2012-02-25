@@ -2,136 +2,228 @@
 
 /**
  * @file
- * Default theme implementation to display a single Drupal page.
- *
- * Available variables:
- *
- * General utility variables:
- * - $base_path: The base URL path of the Drupal installation. At the very
- *   least, this will always default to /.
- * - $directory: The directory the template is located in, e.g. modules/system
- *   or themes/bartik.
- * - $is_front: TRUE if the current page is the front page.
- * - $logged_in: TRUE if the user is registered and signed in.
- * - $is_admin: TRUE if the user has permission to access administration pages.
- *
- * Site identity:
- * - $front_page: The URL of the front page. Use this instead of $base_path,
- *   when linking to the front page. This includes the language domain or
- *   prefix.
- * - $logo: The path to the logo image, as defined in theme configuration.
- * - $site_name: The name of the site, empty when display has been disabled
- *   in theme settings.
- * - $site_slogan: The slogan of the site, empty when display has been disabled
- *   in theme settings.
- *
- * Navigation:
- * - $main_menu (array): An array containing the Main menu links for the
- *   site, if they have been configured.
- * - $secondary_menu (array): An array containing the Secondary menu links for
- *   the site, if they have been configured.
- * - $breadcrumb: The breadcrumb trail for the current page.
- *
- * Page content (in order of occurrence in the default page.tpl.php):
- * - $title_prefix (array): An array containing additional output populated by
- *   modules, intended to be displayed in front of the main title tag that
- *   appears in the template.
- * - $title: The page title, for use in the actual HTML content.
- * - $title_suffix (array): An array containing additional output populated by
- *   modules, intended to be displayed after the main title tag that appears in
- *   the template.
- * - $messages: HTML for status and error messages. Should be displayed
- *   prominently.
- * - $tabs (array): Tabs linking to any sub-pages beneath the current page
- *   (e.g., the view and edit tabs when displaying a node).
- * - $action_links (array): Actions local to the page, such as 'Add menu' on the
- *   menu administration interface.
- * - $feed_icons: A string of all feed icons for the current page.
- * - $node: The node object, if there is an automatically-loaded node
- *   associated with the page, and the node ID is the second argument
- *   in the page's path (e.g. node/12345 and node/12345/revisions, but not
- *   comment/reply/12345).
- *
- * Regions:
- * - $page['header']: Items for the header region.
- * - $page['content']: The main content of the current page.
- * - $page['sidebar_left']: Items for the first sidebar.
- * - $page['footer']: Items for the footer region.
- *
- * @see template_preprocess()
- * @see template_preprocess_page()
- * @see template_process()
+ * dtb's theme implementation to display a single Drupal page.
  */
 ?>
-
-  <div class="container-fluid">
-    <div class="sidebar">
-      <?php if ($site_name || $site_slogan): ?>
-        <div id="name-and-slogan">
-          <?php if ($site_name): ?>
-            <?php if ($title): ?>
-              <div id="site-name"><strong>
-                <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><span><?php print $site_name; ?></span></a>
-              </strong></div>
-            <?php else: /* Use h1 when the content title is empty */ ?>
-              <h1 id="site-name">
-                <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><span><?php print $site_name; ?></span></a>
-              </h1>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="#">Project name</a>
+      <div class="nav-collapse">
+        <ul class="nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
+<div class="container">
+  <!-- Pre-content site header -->
+  <div class="row">
+    <!-- Define this -->
+    <!-- Drupal header classes-->
+    <div id="header" class="<?php print $secondary_menu ? 'with-secondary-menu': 'without-secondary-menu'; ?>"><div class="section clearfix">
+      <!-- Logo -->
+      <div class="span5">
+        <?php if ($logo): ?>
+          <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
+          <img src="<?php print base_path().path_to_theme(). '/images/logo.png'; ?>" alt="Mystery Experience" />
+          </a>
+        <?php endif; ?>
+      </div>
+      <!-- Masthead and navigation -->
+      <div class="span11">
+        <!-- Navigation row -->
+        <div class="row">
+          <div class="span7 offset4">
+            <?php if ($main_menu): ?>
+              <div id="main-menu" class="navigation">
+                <?php print theme('links__system_main_menu', array(
+                  'links' => $main_menu,
+                  'attributes' => array(
+                    'id' => 'main-menu-links',
+                    'class' => array('links', 'clearfix'),
+                  ),
+                  'heading' => array(
+                    'text' => t('Main menu'),
+                    'level' => 'h2',
+                    'class' => array('element-invisible'),
+                  ),
+                ));
+                ?>
+              </div> <!-- /#main-menu -->
             <?php endif; ?>
-          <?php endif; ?>
+          </div> <!-- /.span7 offset4 -->
+        </div> <!-- /.row -->
 
-          <?php if ($site_slogan): ?>
-            <div id="site-slogan"><?php print $site_slogan; ?></div>
-          <?php endif; ?>
-        </div> <!-- /#name-and-slogan -->
-      <?php endif; ?>
+        <!-- Masthead row -->
+        <div class="row">
+          <div class="span11">
+            <?php if ($site_name || $site_slogan): ?>
+              <div class="row">
+                <div class="span5 offset6">
+                  <div id="name-and-slogan"<?php if ($hide_site_name && $hide_site_slogan) { print ' class="element-invisible"'; } ?>>
+                    <?php if ($site_name): ?>
+                      <?php if ($title): ?>
+                        <div id="site-name"<?php if ($hide_site_name) { print ' class="element-invisible"'; } ?>>
+                          <strong>
+                            <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><span><?php print $site_name; ?></span></a>
+                          </strong>
+                        </div>
+                      <?php else: /* Use h1 when the content title is empty */ ?>
+                        <h1 id="site-name"<?php if ($hide_site_name) { print ' class="element-invisible"'; } ?>>
+                          <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><span><?php print $site_name; ?></span></a>
+                        </h1>
+                      <?php endif; ?>
+                    <?php endif; ?>
+                    <?php if ($site_slogan): ?>
+                      <div id="site-slogan"<?php if ($hide_site_slogan) { print ' class="element-invisible"'; } ?>>
+                        <?php print $site_slogan; ?>
+                      </div>
+                    <?php endif; ?>
+                  </div> <!-- /#name-and-slogan -->
+                </div> <!-- /.span5 offset6 -->
+              </div> <!-- /.row -->
+            <?php endif; ?>
+          </div>
+        </div>
+      </div> <!-- /Masthead and navigation -->
 
-      <?php if ($main_menu || $secondary_menu): ?>
-        <div id="navigation"><div class="section">
-          <?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('id' => 'main-menu', 'class' => array('links', 'inline', 'clearfix')), 'heading' => t('Main menu'))); ?>
-          <?php print theme('links__system_secondary_menu', array('links' => $secondary_menu, 'attributes' => array('id' => 'secondary-menu', 'class' => array('links', 'inline', 'clearfix')), 'heading' => t('Secondary menu'))); ?>
-        </div></div> <!-- /.section, /#navigation -->
-      <?php endif; ?>
+      <!-- ?? -->
+      <?php print render($page['header']); ?>
+      <!-- ?? -->
 
-      <?php if ($page['sidebar_left']): ?>
-        <?php print render($page['sidebar_left']); ?>
-      <?php endif; ?>
-    </div> <!-- /.sidebar -->
+    </div></div> <!-- /.section, /#header -->
+  </div> <!-- /.row, /Pre-content site header -->
 
-    <div class="content">
-      <div id="page-wrapper"><div id="page">
+  <!-- Website content -->
+  <div class="content-container">
 
-        <?php if ($page['header']): ?>
-          <div id="header"><div class="section clearfix">
-            <?php print render($page['header']); ?>
-          </div></div> <!-- /.section, /#header -->
-        <?php endif; ?>
-
-        <?php if ($breadcrumb): ?>
-          <div id="breadcrumb"><?php print $breadcrumb; ?></div>
-        <?php endif; ?>
-
+    <?php if ($messages): ?>
+      <div id="messages"><div class="section clearfix">
         <?php print $messages; ?>
+      </div></div> <!-- /.section, /#messages -->
+    <?php endif; ?>
 
-        <div id="main-wrapper"><div id="main" class="clearfix">
+    <div id="main-wrapper" class="clearfix"><div id="main" class="clearfix">
+      <?php if ($breadcrumb): ?>
+        <div class="row">
+          <div class="span16">
+              <!--Rewrite the breadcrumb template code to make the links ULs-->
+              <div id="breadcrumb"><?php print $breadcrumb; ?></div>
+          </div>
+        </div>
+      <?php endif; ?>
 
+      <?php
+      // Define grid spans
+      // This should probably move to template.php
+      if ($page['sidebar_first'] && $page['sidebar_second']) {
+        $sidebar_first_span = '4';
+        $sidebar_second_span = '4';
+        $content_span = '8';
+      }
+      elseif (!$page['sidebar_first'] && $page['sidebar_second']) {
+        $sidebar_second_span = '5';
+        $content_span = '11';
+      }
+      elseif ($page['sidebar_first'] && !$page['sidebar_second']) {
+        $sidebar_first_span = '5';
+        $content_span = '11';
+      }
+      elseif (!$page['sidebar_first'] && !$page['sidebar_second']) {
+        $content_span = '16';
+      }
+      ?>
+
+      <div class="row">
+        <?php if ($page['sidebar_first']): ?>
+          <!-- First sidebar -->
+          <div class="span<?php print $sidebar_first_span; ?>">
+            <div id="sidebar-first" class="column sidebar"><div class="section">
+              <?php print render($page['sidebar_first']); ?>
+            </div></div> <!-- /.section, /#sidebar-first -->
+          </div>
+        <?php endif; ?>
+
+        <!-- Content -->
+        <div class="span<?php print $content_span; ?>">
           <div id="content" class="column"><div class="section">
             <a id="main-content"></a>
+
+            <!-- Page title -->
             <?php print render($title_prefix); ?>
-            <?php if ($title): ?><h1 class="title" id="page-title"><?php print $title; ?></h1><?php endif; ?>
+            <?php if ($title): ?>
+              <h1 class="title" id="page-title">
+                <?php print $title; ?>
+              </h1>
+            <?php endif; ?>
             <?php print render($title_suffix); ?>
-            <?php if ($tabs): ?><div class="tabs"><?php print render($tabs); ?></div><?php endif; ?>
+
+            <?php
+            // We have to check for the primary element in the tabs
+            // array. Even when there are no tabs the $tabs array will
+            // be populated
+            if ($tabs['#primary']):
+            ?>
+              <div class="tabs">
+                <?php print render($tabs); ?>
+              </div>
+            <?php endif; ?>
+
+            <!-- Page content -->
             <?php print render($page['help']); ?>
-            <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
+
+            <?php if ($action_links): ?>
+              <ul class="action-links">
+                <?php print render($action_links); ?>
+              </ul>
+            <?php endif; ?>
             <?php print render($page['content']); ?>
+
+            <!-- Feed icons -->
             <?php print $feed_icons; ?>
+
           </div></div> <!-- /.section, /#content -->
 
-        </div></div> <!-- /#main, /#main-wrapper -->
+        </div>
 
-        <div id="footer"><div class="section">
+        <?php if ($page['sidebar_second']): ?>
+          <!-- Second sidebar -->
+          <div class="span<?php print $sidebar_second_span; ?>">
+            <div id="sidebar-second" class="column sidebar"><div class="section">
+              <?php print render($page['sidebar_second']); ?>
+            </div></div> <!-- /.section, /#sidebar-second -->
+          </div>
+        <?php endif; ?>
+
+      </div> <!-- /.row -->
+
+    </div></div> <!-- /#main, /#main-wrapper -->
+
+    <!-- Footer -->
+    <div id="footer-wrapper"><div class="section">
+
+      <?php if ($page['footer']): ?>
+        <div id="footer-columns" class="clearfix">
           <?php print render($page['footer']); ?>
-        </div></div> <!-- /.section, /#footer -->
-      </div></div> <!-- /#page, /#page-wrapper -->
-    </div> <!-- /.content -->
-  </div> <!-- /.container-fluid -->
+        </div> <!-- /#footer-columns -->
+      <?php endif; ?>
+
+      <?php if ($page['footer']): ?>
+        <div id="footer" class="clearfix">
+          <?php print render($page['footer']); ?>
+        </div> <!-- /#footer -->
+      <?php endif; ?>
+
+    </div></div> <!-- /.section, /#footer-wrapper -->
+
+  </div> <!-- /.content-container -->
+</div> <!-- /.container -->

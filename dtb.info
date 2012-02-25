@@ -12,6 +12,7 @@ stylesheets[all][] = bootstrap/docs/assets/css/bootstrap.css
 stylesheets[all][] = css/style.css
 
 regions[header] = Header
-regions[sidebar_left] = Left sidebar
+regions[sidebar_first] = First sidebar
+regions[sidebar_second] = Second sidebar
 regions[content] = Content
 regions[footer] = Footer
