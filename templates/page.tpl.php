@@ -16,13 +16,22 @@
       <?php if ($site_name): ?>
         <a class="brand <?php if ($hide_site_name) { print ' class="element-invisible"'; } ?>" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><?php print $site_name; ?></a>
       <?php endif; ?>
-      <div class="nav-collapse">
-        <ul class="nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div><!--/.nav-collapse -->
+      <?php if ($main_menu): ?>
+        <div class="nav-collapse">
+          <?php print theme('links__system_main_menu', array(
+            'links' => $main_menu,
+            'attributes' => array(
+              'class' => array('nav'),
+            ),
+            'heading' => array(
+              'text' => t('Main menu'),
+              'level' => 'h2',
+              'class' => array('element-invisible'),
+            ),
+          ));
+          ?>
+        </div> <!-- /.nav-collapse -->
+      <?php endif; ?>
     </div>
   </div>
 </div>
@@ -45,23 +54,6 @@
         <!-- Navigation row -->
         <div class="row">
           <div class="span7 offset4">
-            <?php if ($main_menu): ?>
-              <div id="main-menu" class="navigation">
-                <?php print theme('links__system_main_menu', array(
-                  'links' => $main_menu,
-                  'attributes' => array(
-                    'id' => 'main-menu-links',
-                    'class' => array('links', 'clearfix'),
-                  ),
-                  'heading' => array(
-                    'text' => t('Main menu'),
-                    'level' => 'h2',
-                    'class' => array('element-invisible'),
-                  ),
-                ));
-                ?>
-              </div> <!-- /#main-menu -->
-            <?php endif; ?>
           </div> <!-- /.span7 offset4 -->
         </div> <!-- /.row -->
 
