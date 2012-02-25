@@ -6,7 +6,7 @@ core = 7.x
 
 # Credit to Wolfgang Stief by CC
 # http://www.flickr.com/photos/stiefkind/6168833438/in/photostream/
-screenshot = screenshot.png
+screenshot = screenshot.jpg
 
 stylesheets[all][] = bootstrap/bootstrap.min.css
 stylesheets[all][] = css/style.css
