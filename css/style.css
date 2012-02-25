@@ -1,4 +1,8 @@
 /*Style to get bootstrap inline with Drupal*/
-.container-fluid {
-  margin-top: 30px;
+
+/* Push the top of the bootstrap page down
+ * to accomodate for the Drupal admin menu
+ * :TODO: Make this conditional */
+.navbar-fixed-top {
+  margin-top: 65px;
 }
