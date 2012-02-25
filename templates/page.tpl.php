@@ -13,7 +13,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand" href="#">Project name</a>
+      <?php if ($site_name): ?>
+        <a class="brand <?php if ($hide_site_name) { print ' class="element-invisible"'; } ?>" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><?php print $site_name; ?></a>
+      <?php endif; ?>
       <div class="nav-collapse">
         <ul class="nav">
           <li class="active"><a href="#">Home</a></li>
@@ -70,19 +72,6 @@
               <div class="row">
                 <div class="span5 offset6">
                   <div id="name-and-slogan"<?php if ($hide_site_name && $hide_site_slogan) { print ' class="element-invisible"'; } ?>>
-                    <?php if ($site_name): ?>
-                      <?php if ($title): ?>
-                        <div id="site-name"<?php if ($hide_site_name) { print ' class="element-invisible"'; } ?>>
-                          <strong>
-                            <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><span><?php print $site_name; ?></span></a>
-                          </strong>
-                        </div>
-                      <?php else: /* Use h1 when the content title is empty */ ?>
-                        <h1 id="site-name"<?php if ($hide_site_name) { print ' class="element-invisible"'; } ?>>
-                          <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><span><?php print $site_name; ?></span></a>
-                        </h1>
-                      <?php endif; ?>
-                    <?php endif; ?>
                     <?php if ($site_slogan): ?>
                       <div id="site-slogan"<?php if ($hide_site_slogan) { print ' class="element-invisible"'; } ?>>
                         <?php print $site_slogan; ?>
