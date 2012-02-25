@@ -4,6 +4,8 @@ package = Core
 version = 0.1
 core = 7.x
 
+# Credit to Wolfgang Stief by CC
+# http://www.flickr.com/photos/stiefkind/6168833438/in/photostream/
 screenshot = screenshot.png
 
 stylesheets[all][] = bootstrap/bootstrap.min.css
