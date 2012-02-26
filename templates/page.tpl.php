@@ -107,27 +107,6 @@
         </div>
       <?php endif; ?>
 
-      <?php
-      // Define grid spans
-      // This should probably move to template.php
-      if ($page['sidebar_first'] && $page['sidebar_second']) {
-        $sidebar_first_span = '3';
-        $sidebar_second_span = '3';
-        $content_span = '6';
-      }
-      elseif (!$page['sidebar_first'] && $page['sidebar_second']) {
-        $sidebar_second_span = '3';
-        $content_span = '9';
-      }
-      elseif ($page['sidebar_first'] && !$page['sidebar_second']) {
-        $sidebar_first_span = '3';
-        $content_span = '9';
-      }
-      elseif (!$page['sidebar_first'] && !$page['sidebar_second']) {
-        $content_span = '12';
-      }
-      ?>
-
       <div class="row">
         <?php if ($page['sidebar_first']): ?>
           <!-- First sidebar -->

@@ -39,6 +39,7 @@ function dtb_process_page(&$variables) {
     // If toggle_site_slogan is FALSE, the site_slogan will be empty, so we rebuild it.
     $variables['site_slogan'] = filter_xss_admin(variable_get('site_slogan', ''));
   }
+
   // Since the title and the shortcut link are both block level elements,
   // positioning them next to each other is much simpler with a wrapper div.
   if (!empty($variables['title_suffix']['add_or_remove_shortcut']) && $variables['title']) {
@@ -53,6 +54,24 @@ function dtb_process_page(&$variables) {
     );
     // Make sure the shortcut link is the first item in title_suffix.
     $variables['title_suffix']['add_or_remove_shortcut']['#weight'] = -100;
+  }
+
+  // Define body span classes based on enabled regions
+  if ($variables['page']['sidebar_first'] && $variables['page']['sidebar_second']) {
+    $variables['sidebar_first_span'] = '3';
+    $variables['content_span'] = '6';
+    $variables['sidebar_second_span'] = '3';
+  }
+  elseif (!$variables['page']['sidebar_first'] && $variables['page']['sidebar_second']) {
+    $variables['content_span'] = '9';
+    $variables['sidebar_second_span'] = '3';
+  }
+  elseif ($variables['page']['sidebar_first'] && !$variables['page']['sidebar_second']) {
+    $variables['sidebar_first_span'] = '3';
+    $variables['content_span'] = '9';
+  }
+  elseif (!$variables['page']['sidebar_first'] && !$variables['page']['sidebar_second']) {
+    $variables['content_span'] = '12';
   }
 
   // Find out how many enabled footer columns we have
