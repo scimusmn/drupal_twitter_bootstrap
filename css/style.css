@@ -4,5 +4,5 @@
  * to accomodate for the Drupal admin menu
  * :TODO: Make this conditional */
 .navbar-fixed-top {
-  margin-top: 65px;
+  /*margin-top: 65px;*/
 }

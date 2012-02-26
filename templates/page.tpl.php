@@ -5,7 +5,9 @@
  * dtb's theme implementation to display a single Drupal page.
  */
 ?>
-<div class="navbar navbar-fixed-top">
+
+<!-- Primary navigation -->
+<div class="navbar">
   <div class="navbar-inner">
     <div class="container">
       <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -35,6 +37,8 @@
     </div>
   </div>
 </div>
+
+<!-- Main content container -->
 <div class="container">
   <!-- Pre-content site header -->
   <div class="row">
