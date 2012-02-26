@@ -191,19 +191,11 @@
 
     <!-- Footer -->
     <div id="footer-wrapper"><div class="section">
-
       <?php if ($page['footer']): ?>
         <div id="footer-columns" class="clearfix">
           <?php print render($page['footer']); ?>
         </div> <!-- /#footer-columns -->
       <?php endif; ?>
-
-      <?php if ($page['footer']): ?>
-        <div id="footer" class="clearfix">
-          <?php print render($page['footer']); ?>
-        </div> <!-- /#footer -->
-      <?php endif; ?>
-
     </div></div> <!-- /.section, /#footer-wrapper -->
 
   </div> <!-- /.content-container -->
