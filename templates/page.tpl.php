@@ -191,10 +191,32 @@
 
     <!-- Footer -->
     <div id="footer-wrapper"><div class="section">
-      <?php if ($page['footer']): ?>
-        <div id="footer-columns" class="clearfix">
-          <?php print render($page['footer']); ?>
+      <?php if ($footer_columns): ?>
+        <div id="footer-columns" class="row">
+          <div class="<?php print $footer_columns_class; ?>">
+            <?php print render($page['footer_firstcolumn']); ?>
+          </div>
+          <?php if ($page['footer_secondcolumn']): ?>
+            <div class="<?php print $footer_columns_class; ?>">
+              <?php print render($page['footer_secondcolumn']); ?>
+            </div>
+          <?php endif; ?>
+          <?php if ($page['footer_thirdcolumn']): ?>
+            <div class="<?php print $footer_columns_class; ?>">
+              <?php print render($page['footer_thirdcolumn']); ?>
+            </div>
+          <?php endif; ?>
+          <?php if ($page['footer_fourthcolumn']): ?>
+            <div class="<?php print $footer_columns_class; ?>">
+              <?php print render($page['footer_fourthcolumn']); ?>
+            </div>
+          <?php endif; ?>
         </div> <!-- /#footer-columns -->
+      <?php endif; ?>
+      <?php if ($page['footer']): ?>
+        <div id="footer-full-width" class="clearfix">
+          <?php print render($page['footer']); ?>
+        </div> <!-- /#footer-full-width -->
       <?php endif; ?>
     </div></div> <!-- /.section, /#footer-wrapper -->
 

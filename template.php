@@ -54,6 +54,27 @@ function dtb_process_page(&$variables) {
     // Make sure the shortcut link is the first item in title_suffix.
     $variables['title_suffix']['add_or_remove_shortcut']['#weight'] = -100;
   }
+
+  // Find out how many enabled footer columns we have
+  $count = 0;
+  foreach ($variables['page'] as $key => $value) {
+    $pos = strpos($key, "footer_");
+    if ($pos !== false) {
+      if (isset($value["#region"])) {
+        $count++;
+      }
+    }
+  }
+
+  // Create column span classes
+  $variables['footer_columns'] = TRUE;
+  if ($count) {
+    $column_width = 12 / $count;
+    $variables['footer_columns_class'] = "span".$column_width;
+  }
+  else {
+    $variables['footer_columns'] = FALSE;
+  }
 }
 
 /**
