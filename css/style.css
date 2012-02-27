@@ -6,3 +6,8 @@
 .navbar-fixed-top {
   margin-top: 65px;
 }
+
+/* Push primary tabs down below nav bar */
+ul.primary {
+  padding: 3em 0 0 1em;
+}
