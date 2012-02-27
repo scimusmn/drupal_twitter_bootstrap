@@ -1,9 +1,10 @@
 /*Style to get bootstrap inline with Drupal*/
 
 /* Push the top of the bootstrap page down
- * to accomodate for the Drupal admin menu */
-.toolbar .navbar-fixed-top {
-  margin-top: 65px;
+ * to accomodate for the Drupal admin menu
+ * :TODO: Make this conditional */
+.navbar-fixed-top {
+  /*margin-top: 65px;*/
 }
 
 /* Push primary tabs and messages down below nav bar */

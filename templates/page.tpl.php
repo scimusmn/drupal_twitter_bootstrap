@@ -5,7 +5,9 @@
  * dtb's theme implementation to display a single Drupal page.
  */
 ?>
-<div class="navbar navbar-fixed-top">
+
+<!-- Primary navigation -->
+<div class="navbar">
   <div class="navbar-inner">
     <div class="container">
       <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -13,47 +15,52 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <?php if ($site_name): ?><a class="brand" href="<?php print $front_page; ?>"><?php print $site_name; ?></a><?php endif; ?>
+      <?php if ($site_name || $logo): ?>
+        <!-- Branding -->
+        <a class="brand <?php if ($hide_site_name) { print ' class="element-invisible"'; } ?>" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home">
+          <?php if ($logo): ?>
+            <img src="<?php print base_path().path_to_theme(). '/images/logo.png'; ?>" alt="<?php print $site_name; ?>" />
+          <?php endif; ?>
+          <?php if ($site_name): ?>
+            <?php print $site_name; ?>
+          <?php endif; ?>
+        </a>
+      <?php endif; ?>
       <?php if ($main_menu): ?>
-        <div id="main-menu" class="navbar nav-collapse">
+        <div class="nav-collapse">
           <?php print theme('links__system_main_menu', array(
             'links' => $main_menu,
             'attributes' => array(
-              'id' => 'main-menu-links',
-              'class' => array('links nav', 'clearfix'),
-             ),
-             'heading' => array(
-               'text' => t('Main menu'),
-               'level' => 'h2',
-               'class' => array('element-invisible'),
-              ),
-            ));
-            ?>
-        </div> <!-- /#main-menu -->
+              'class' => array('nav'),
+            ),
+            'heading' => array(
+              'text' => t('Main menu'),
+              'level' => 'h2',
+              'class' => array('element-invisible'),
+            ),
+          ));
+          ?>
+        </div> <!-- /.nav-collapse -->
+      <?php endif; ?>
+      <?php if ($page['navbar']): ?>
+        <?php print render($page['navbar']); ?>
       <?php endif; ?>
     </div>
   </div>
 </div>
+
+<!-- Main content container -->
 <div class="container">
   <!-- Pre-content site header -->
   <div class="row">
     <!-- Define this -->
     <!-- Drupal header classes-->
     <div id="header" class="<?php print $secondary_menu ? 'with-secondary-menu': 'without-secondary-menu'; ?>"><div class="section clearfix">
-      <!-- Logo -->
-      <div class="span5">
-        <?php if ($logo): ?>
-          <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
-          <img src="<?php print $logo; ?>" alt="<?php print $site_name; ?>" />
-          </a>
-        <?php endif; ?>
-      </div>
       <!-- Masthead and navigation -->
       <div class="span11">
         <!-- Navigation row -->
         <div class="row">
           <div class="span7 offset4">
-
           </div> <!-- /.span7 offset4 -->
         </div> <!-- /.row -->
 
@@ -64,19 +71,6 @@
               <div class="row">
                 <div class="span5 offset6">
                   <div id="name-and-slogan"<?php if ($hide_site_name && $hide_site_slogan) { print ' class="element-invisible"'; } ?>>
-                    <?php if ($site_name): ?>
-                      <?php if ($title): ?>
-                        <div id="site-name"<?php if ($hide_site_name) { print ' class="element-invisible"'; } ?>>
-                          <strong>
-                            <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><span><?php print $site_name; ?></span></a>
-                          </strong>
-                        </div>
-                      <?php else: /* Use h1 when the content title is empty */ ?>
-                        <h1 id="site-name"<?php if ($hide_site_name) { print ' class="element-invisible"'; } ?>>
-                          <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><span><?php print $site_name; ?></span></a>
-                        </h1>
-                      <?php endif; ?>
-                    <?php endif; ?>
                     <?php if ($site_slogan): ?>
                       <div id="site-slogan"<?php if ($hide_site_slogan) { print ' class="element-invisible"'; } ?>>
                         <?php print $site_slogan; ?>
@@ -115,27 +109,6 @@
           </div>
         </div>
       <?php endif; ?>
-
-      <?php
-      // Define grid spans
-      // This should probably move to template.php
-      if ($page['sidebar_first'] && $page['sidebar_second']) {
-        $sidebar_first_span = '4';
-        $sidebar_second_span = '4';
-        $content_span = '8';
-      }
-      elseif (!$page['sidebar_first'] && $page['sidebar_second']) {
-        $sidebar_second_span = '5';
-        $content_span = '11';
-      }
-      elseif ($page['sidebar_first'] && !$page['sidebar_second']) {
-        $sidebar_first_span = '5';
-        $content_span = '11';
-      }
-      elseif (!$page['sidebar_first'] && !$page['sidebar_second']) {
-        $content_span = '16';
-      }
-      ?>
 
       <div class="row">
         <?php if ($page['sidebar_first']): ?>
@@ -204,13 +177,33 @@
 
     <!-- Footer -->
     <div id="footer-wrapper"><div class="section">
-
-      <?php if ($page['footer']): ?>
-        <div id="footer" class="clearfix">
-          <?php print render($page['footer']); ?>
-        </div> <!-- /#footer -->
+      <?php if ($footer_columns): ?>
+        <div id="footer-columns" class="row">
+          <div class="<?php print $footer_columns_class; ?>">
+            <?php print render($page['footer_firstcolumn']); ?>
+          </div>
+          <?php if ($page['footer_secondcolumn']): ?>
+            <div class="<?php print $footer_columns_class; ?>">
+              <?php print render($page['footer_secondcolumn']); ?>
+            </div>
+          <?php endif; ?>
+          <?php if ($page['footer_thirdcolumn']): ?>
+            <div class="<?php print $footer_columns_class; ?>">
+              <?php print render($page['footer_thirdcolumn']); ?>
+            </div>
+          <?php endif; ?>
+          <?php if ($page['footer_fourthcolumn']): ?>
+            <div class="<?php print $footer_columns_class; ?>">
+              <?php print render($page['footer_fourthcolumn']); ?>
+            </div>
+          <?php endif; ?>
+        </div> <!-- /#footer-columns -->
       <?php endif; ?>
-
+      <?php if ($page['footer']): ?>
+        <div id="footer-full-width" class="clearfix">
+          <?php print render($page['footer']); ?>
+        </div> <!-- /#footer-full-width -->
+      <?php endif; ?>
     </div></div> <!-- /.section, /#footer-wrapper -->
 
   </div> <!-- /.content-container -->
