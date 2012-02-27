@@ -15,8 +15,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <?php if ($site_name): ?>
-        <a class="brand <?php if ($hide_site_name) { print ' class="element-invisible"'; } ?>" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><?php print $site_name; ?></a>
+      <?php if ($site_name || $logo): ?>
+        <!-- Branding -->
+        <a class="brand <?php if ($hide_site_name) { print ' class="element-invisible"'; } ?>" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home">
+          <?php if ($logo): ?>
+            <img src="<?php print base_path().path_to_theme(). '/images/logo.png'; ?>" alt="<?php print $site_name; ?>" />
+          <?php endif; ?>
+          <?php if ($site_name): ?>
+            <?php print $site_name; ?>
+          <?php endif; ?>
+        </a>
       <?php endif; ?>
       <?php if ($main_menu): ?>
         <div class="nav-collapse">
@@ -45,14 +53,6 @@
     <!-- Define this -->
     <!-- Drupal header classes-->
     <div id="header" class="<?php print $secondary_menu ? 'with-secondary-menu': 'without-secondary-menu'; ?>"><div class="section clearfix">
-      <!-- Logo -->
-      <div class="span5">
-        <?php if ($logo): ?>
-          <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
-          <img src="<?php print base_path().path_to_theme(). '/images/logo.png'; ?>" alt="Mystery Experience" />
-          </a>
-        <?php endif; ?>
-      </div>
       <!-- Masthead and navigation -->
       <div class="span11">
         <!-- Navigation row -->
