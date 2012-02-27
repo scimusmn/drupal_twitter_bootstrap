@@ -11,6 +11,7 @@ screenshot = screenshot.png
 stylesheets[all][] = bootstrap/docs/assets/css/bootstrap.css
 stylesheets[all][] = css/style.css
 
+regions[navbar] = Navbar
 regions[header] = Header
 regions[featured] = Featured
 regions[sidebar_first] = First sidebar

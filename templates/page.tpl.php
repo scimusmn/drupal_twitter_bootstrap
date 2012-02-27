@@ -42,6 +42,9 @@
           ?>
         </div> <!-- /.nav-collapse -->
       <?php endif; ?>
+      <?php if ($page['navbar']): ?>
+        <?php print render($page['navbar']); ?>
+      <?php endif; ?>
     </div>
   </div>
 </div>
