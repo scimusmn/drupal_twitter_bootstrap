@@ -6,7 +6,13 @@
   margin-top: 65px;
 }
 
-/* Push primary tabs down below nav bar */
+/* Push primary tabs and messages down below nav bar */
 ul.primary {
   padding: 4em 0 0 1em;
 }
+#messages {
+  position:relative;
+  top:45px;
+}
+
+
