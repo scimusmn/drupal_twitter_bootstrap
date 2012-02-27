@@ -13,7 +13,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <?php if ($site_name): ?><a class="brand" href="#"><?php print $site_name; ?></a><?php endif; ?>
+      <?php if ($site_name): ?><a class="brand" href="<?php print $front_page; ?>"><?php print $site_name; ?></a><?php endif; ?>
       <?php if ($main_menu): ?>
         <div id="main-menu" class="navbar nav-collapse">
           <?php print theme('links__system_main_menu', array(
