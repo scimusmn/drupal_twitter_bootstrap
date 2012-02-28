@@ -173,3 +173,11 @@ function dtb_field__taxonomy_term_reference($variables) {
 
   return $output;
 }
+
+/**
+ * Implements hook_form_alter().
+ * Add a class to buttons so they use Bootstrap styles.
+ */
+function dtb_form_alter(&$form, &$form_state, $form_id) {
+  $form['actions']['submit']['#attributes'] = array('class' => array('btn'));
+}
