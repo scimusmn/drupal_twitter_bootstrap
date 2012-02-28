@@ -181,3 +181,18 @@ function dtb_field__taxonomy_term_reference($variables) {
 function dtb_form_alter(&$form, &$form_state, $form_id) {
   $form['actions']['submit']['#attributes'] = array('class' => array('btn'));
 }
+
+/**
+ * Display a view as a table style.
+ */
+function dtb_preprocess_views_view_table(&$vars) {
+
+  // Count how many rows we're outputting, and if there's more than 50, add the table-condensed style.
+  $total = count($vars['rows']);
+  if ($total > 50) {
+    $vars['classes_array'][] = 'table-condensed';
+  }
+
+  // Add general Bootstrap table classes
+  $vars['classes_array'][] = 'table table-striped table-bordered';
+}
