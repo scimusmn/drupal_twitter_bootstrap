@@ -12,4 +12,7 @@ ul.primary {
   padding: 4em 0 0 1em;
 }
 
-
+/* Adjust position of autocomplete loader gif to fit padded text fields */
+html.js input.form-autocomplete {
+  background-position: 100% 6px;
+}
