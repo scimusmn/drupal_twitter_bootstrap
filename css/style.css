@@ -11,3 +11,6 @@
 html.js input.form-autocomplete {
   background-position: 100% 6px;
 }
+ul.tabs.primary li {
+  line-height: normal;
+}
