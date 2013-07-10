@@ -19,7 +19,7 @@
         <!-- Branding -->
         <a class="brand <?php if ($hide_site_name) { print ' class="element-invisible"'; } ?>" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home">
           <?php if ($logo): ?>
-            <img src="<?php print base_path().path_to_theme(). '/images/logo.png'; ?>" alt="<?php print $site_name; ?>" />
+            <img src="<?php print $logo; ?>" alt="<?php print $site_name; ?>" />
           <?php endif; ?>
           <?php if ($site_name): ?>
             <?php print $site_name; ?>

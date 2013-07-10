@@ -7,13 +7,19 @@
   /*margin-top: 65px;*/
 }
 
-/* Push primary tabs and messages down below nav bar */
-ul.primary {
-  padding: 4em 0 0 1em;
+/* Adjust position of autocomplete loader gif to fit padded text fields */
+html.js input.form-autocomplete {
+  background-position: 100% 6px;
 }
-#messages {
-  position:relative;
-  top:45px;
+ul.tabs.primary li {
+  line-height: normal;
 }
 
-
+/* Fix alignment and spacing on node save buttons */
+.node-form .form-actions input,
+.confirmation .form-actions input {
+  margin-right: 4px;
+}
+.node-form .form-actions .btn {
+  margin-bottom: 9px;
+}
