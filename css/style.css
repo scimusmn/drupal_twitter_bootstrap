@@ -16,7 +16,8 @@ ul.tabs.primary li {
 }
 
 /* Fix alignment and spacing on node save buttons */
-.node-form .form-actions input {
+.node-form .form-actions input,
+.confirmation .form-actions input {
   margin-right: 4px;
 }
 .node-form .form-actions .btn {
