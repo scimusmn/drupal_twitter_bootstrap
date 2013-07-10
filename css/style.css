@@ -14,3 +14,11 @@ html.js input.form-autocomplete {
 ul.tabs.primary li {
   line-height: normal;
 }
+
+/* Fix alignment and spacing on node save buttons */
+.node-form .form-actions input {
+  margin-right: 4px;
+}
+.node-form .form-actions .btn {
+  margin-bottom: 9px;
+}
